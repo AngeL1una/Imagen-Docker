@@ -1,19 +1,56 @@
-# Crear una imagen de Docker para una aplicación Node.js
+# 🌐 Proyecto Node.js con Docker  Angel Luna Lugo
 
-Cómo crear una imagen de Docker para una aplicación Node.js. Se parte de una imagen base de Node.js 18 en Alpine, una versión minimalista de Linux, optimizada para producción.
+![Node.js](https://img.shields.io/badge/Node.js-18.x-brightgreen?style=flat-square)
+![Docker](https://img.shields.io/badge/Docker-19.x-blue?style=flat-square)
+![Alpine](https://img.shields.io/badge/Alpine-Linux-orange?style=flat-square)
 
-### pasos:
+## 📦 Descripción del Proyecto
 
-- **Dockerfile**: Se crea un archivo llamado `Dockerfile` sin extensión, donde se especifican las instrucciones para construir la imagen.
-- **Imagen base**: `FROM node:18-alpine` para usar Node.js 18 en Alpine.
-- **Directorio de trabajo**: `WORKDIR /app` define `/app` como el directorio de trabajo dentro de la imagen.
-- **Copiar package.json**: `COPY package.json .` copia el archivo de dependencias para instalarlas luego.
-- **Instalar dependencias**: `RUN npm install` para reconstruir los módulos de Node.js en un entorno Linux Alpine.
-- **Copiar proyecto**: `COPY . .` copia todo el sistema de archivos del proyecto, excepto lo excluido en `.dockerignore`, al directorio de trabajo.
-- **Construir para producción**: `RUN npm run build` crea la versión de producción de la aplicación.
-- **Exponer puerto**: `EXPOSE 3000` hace accesible el puerto 3000 para comunicarse.
+Este proyecto es una aplicación Node.js empaquetada en una imagen de Docker basada en Node.js 18 en Alpine. Alpine es una versión minimalista de Linux, optimizada para entornos de producción, lo que hace que la imagen sea más ligera y rápida.
 
-### Dockerfile
+## 🛠️ Tecnologías Utilizadas
+
+- **Node.js 18**: Plataforma de desarrollo basada en JavaScript.
+- **Docker**: Plataforma para desarrollar, desplegar y ejecutar aplicaciones dentro de contenedores.
+- **Alpine Linux**: Distribución de Linux ligera, rápida y segura para entornos de producción.
+
+## 🚀 Instrucciones para Construir la Imagen
+
+Sigue estos pasos para crear y ejecutar la imagen de Docker de la aplicación:
+
+1. **Clonar el Repositorio**:
+    ```bash
+    git clone https://github.com/usuario/nombre-del-repositorio.git
+    cd nombre-del-repositorio
+    ```
+
+2. **Construir la Imagen Docker**:
+    ```bash
+    docker build -t nombre-de-imagen .
+    ```
+
+3. **Ejecutar el Contenedor**:
+    ```bash
+    docker run -p 3000:3000 nombre-de-imagen
+    ```
+
+4. **Acceder a la Aplicación**:
+    - La aplicación estará disponible en: [http://localhost:3000](http://localhost:3000)
+  
+3. **Ejecutar el .dockerignorer**:
+    ```A continuación se muestra un ejemplo del archivo .dockerignore utilizado para optimizar la construcción de la imagen:
+      Dockerfile
+    .dockerignore
+    node_modules
+    npm-debug.log
+    README.md
+    .next
+    .git
+
+    ```
+
+
+## 📄 Dockerfile
 
 ```dockerfile
 FROM node:18-alpine
@@ -31,3 +68,4 @@ RUN npm run build
 EXPOSE 3000
 
 CMD [ "npm", "start" ]
+
